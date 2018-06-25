@@ -61,8 +61,9 @@ scrapy crawl douban250
 *actor及actor的值存储为Array, 其他值均存储为String*
 *由于猫眼的电影的评分数据及票房数据均采用加密，爬取下来的数据均为乱码*
 
-4. Robo 3T GUI工具
-豆瓣电影的第一项，如下图所示：
-
+4. Robo 3T GUI工具  
+豆瓣电影的第一项，如下图所示：  
+![douban](./img/douban.png)
 猫眼电影的第一项，如下图所示：
+![maoyan](./img/maoyan.png)
 
