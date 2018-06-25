@@ -1,12 +1,12 @@
 # Spider
 
-1. 环境要求
+### 1. 环境要求  
 > 安装Python  
 安装scrapy库：conda install scrapy  
 安装pymongo库：conda install scrapy  
 安装MongoDB  
 
-2. 执行
+### 2. 执行  
 爬取猫眼电影：在maoyan目录下，运行指令
 ```
 scrapy crawl maoyan
@@ -16,7 +16,7 @@ scrapy crawl maoyan
 scrapy crawl douban250
 ```
 
-3. 结果
+### 3. 结果  
 将爬取的结果写入MongoDB中
 
 豆瓣电影存储格式： 
@@ -58,12 +58,12 @@ scrapy crawl douban250
 | actor_src | 演员照片URL |
 | introduction | 经典台词 |
 
-*actor及actor的值存储为Array, 其他值均存储为String*
+*actor及actor的值存储为Array, 其他值均存储为String*  
 *由于猫眼的电影的评分数据及票房数据均采用加密，爬取下来的数据均为乱码*
 
-4. Robo 3T GUI工具  
-豆瓣电影的第一项，如下图所示：  
-![douban](./img/douban.png)
-猫眼电影的第一项，如下图所示：
+### 4. Robo 3T GUI工具  
+##### 豆瓣电影的第一项，如下图所示：  
+![douban](./img/douban.png)  
+##### 猫眼电影的第一项，如下图所示：
 ![maoyan](./img/maoyan.png)
 
