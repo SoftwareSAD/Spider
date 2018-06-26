@@ -21,7 +21,7 @@ scrapy crawl MaoYanNews
 ```
 爬取电影预告片：在video目录下，运行指令
 ```
-scrapy crawl video
+scrapy crawl MaoYanVideos
 ```
 ### 3. 结果  
 将爬取的结果写入MongoDB中
