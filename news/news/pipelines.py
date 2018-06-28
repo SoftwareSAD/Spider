@@ -23,7 +23,7 @@ class NewsPipeline(object):
         )
 
     def open_spider(self, spider):
-        self.client = pymongo.MongoClient(host = self.mongo_host, port = self.mongo_port)
+        self.client = pymongo.MongoClient('mongodb://heygrandpa:SYSU2018@ds117691.mlab.com:17691/maoyanmovie')
         self.db = self.client[self.mongo_db]
 
     def close_spider(self, spider):

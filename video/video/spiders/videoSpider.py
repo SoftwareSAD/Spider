@@ -7,27 +7,29 @@ from video.items import VideoItem
 class newSpider(CrawlSpider):
 	name = 'MaoYanVideos'
 
-	start_urls = ['http://maoyan.com/news?showTab=3']
-	rules = (
-		Rule(LinkExtractor(allow=(r'http://maoyan.com/news\?showTab=3\&offset=\d+')), callback='parse_item'),
-	)
+	base_url = 'http://maoyan.com/news?showTab=3&offset='
+	offset=0
+	start_urls=[base_url+str(offset),]
 
-	def parse_item(self, response):
-		# print(response.body)
-		sel = Selector(response)
-		title = sel.xpath('//div[@class="video-box"]/h4/a/text()').extract()
-		abstract = []
-		cover_img_src = sel.xpath('//div[@class="video-box"]/a/img/@src').extract()
-		url = sel.xpath('//div[@class="video-box"]/a/@href').extract()
-		date = []
-		view_count = sel.xpath('//div[@class="video-box"]/div/span/text()').extract()
+	def parse(self, response):
 
-		item = VideoItem()
-		item['title'] = title
-		item['abstract'] = abstract
-		item['cover_img_src'] = cover_img_src
-		item['url'] = url
-		item['date'] = date
-		item['view_count'] = view_count
+		videos = response.xpath('//div[@class="video-box"]')
 
-		yield item
+		for sel in videos:
+
+			title = sel.xpath('./h4/a/text()').extract_first()
+			cover_img_src = sel.xpath('./a/img/@src').extract_first()
+			url = sel.xpath('./a/@href').extract_first()
+			view_count = sel.xpath('./div/span/text()').extract_first()
+
+			item = VideoItem()
+			item['title'] = title
+			item['cover_img_src'] = cover_img_src
+			item['url'] = url
+			item['view_count'] = view_count
+
+			yield item
+
+		if self.offset < 270:
+			self.offset += 30
+			yield scrapy.Request(url=self.base_url+str(self.offset),callback=self.parse)

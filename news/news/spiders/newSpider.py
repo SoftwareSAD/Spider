@@ -4,34 +4,39 @@ from scrapy.selector import Selector
 from scrapy.linkextractors import LinkExtractor
 from news.items import NewsItem
 
-class newSpider(CrawlSpider):
+class newSpider(scrapy.Spider):
 	name = 'MaoYanNews'
 
-	start_urls = ['http://maoyan.com/news?showTab=2']
-	rules = (
-		Rule(LinkExtractor(allow=(r'http://maoyan.com/news\?showTab=2\&offset=\d+')), callback='parse_item'),
-	)
+	base_url = 'http://maoyan.com/news?showTab=2&offset='
+	offset=0
+	start_urls=[base_url+str(offset),]
 
-	def parse_item(self, response):
-		# print(response.body)
-		sel = Selector(response)
-		title = sel.xpath('//div[@class="news-box clearfix"]/div/h4/a/text()').extract()
-		abstract = sel.xpath('//div[@class="news-box clearfix"]/div/div[1]/text()').extract()
-		article = sel.xpath('//div[@class="news-box clearfix"]/div/div[2]/span[3]/a/text()').extract()
-		for i in range(len(article)):
-			article[i] = article[i].strip()
-		cover_img_src = sel.xpath('//div[@class="news-box clearfix"]/a/img/@src').extract()
-		news_url = sel.xpath('//div[@class="news-box clearfix"]/div/h4/a/@href').extract()
-		news_date = sel.xpath('//div[@class="news-box clearfix"]/div/div[2]/span[2]/text()').extract()
-		view_count = sel.xpath('//div[@class="news-box clearfix"]/div/div[2]/span[4]/text()').extract()
+	def parse(self, response):
+		news = response.xpath('//div[@class="news-box clearfix"]')
 
-		item = NewsItem()
-		item['title'] = title
-		item['abstract'] = abstract
-		item['article'] = article
-		item['cover_img_src'] = cover_img_src
-		item['news_url'] = news_url
-		item['news_date'] = news_date
-		item['view_count'] = view_count
+		for sel in news:
 
-		yield item
+			title = sel.xpath('./div/h4/a/text()').extract_first()
+			abstract = sel.xpath('./div/div[1]/text()').extract_first()
+			article = sel.xpath('./div/div[2]/span[3]/a/text()').extract_first()
+			if (article):
+				article = article.strip()
+			cover_img_src = sel.xpath('./a/img/@src').extract_first()
+			news_url = sel.xpath('./div/h4/a/@href').extract_first()
+			news_date = sel.xpath('./div/div[2]/span[2]/text()').extract_first()
+			view_count = sel.xpath('./div/div[2]/span[4]/text()').extract_first()
+
+			item = NewsItem()
+			item['title'] = title
+			item['abstract'] = abstract
+			item['article'] = article
+			item['cover_img_src'] = cover_img_src
+			item['news_url'] = news_url
+			item['news_date'] = news_date
+			item['view_count'] = view_count
+
+			yield item
+
+		if self.offset < 3000:
+			self.offset += 10
+			yield scrapy.Request(url=self.base_url+str(self.offset),callback=self.parse)

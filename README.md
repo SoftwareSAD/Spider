@@ -2,9 +2,13 @@
 
 ### 1. 环境要求  
 > 安装Python  
-安装scrapy库：conda install scrapy  
-安装pymongo库：conda install scrapy  
-安装MongoDB  
+> 安装scrapy库：conda install scrapy  
+> 安装pymongo库：conda install pymongo
+>
+> 安装MongoDB (可选)
+> 
+
+利用 mlab 平台配置云端MongoDB数据库
 
 ### 2. 执行  
 爬取猫眼电影：在maoyan目录下，运行指令
@@ -28,9 +32,9 @@ scrapy crawl MaoYanVideos
 
 豆瓣电影存储格式： 
 
-|database|DouBan|  
+|database|maoyanmovies|
 |:-: | :-: |
-| collections | DouBanMovies |
+| collections | DouBan250 |
 | id | id |
 | title | 电影名字 |
 | director | 导演 |
@@ -46,7 +50,7 @@ scrapy crawl MaoYanVideos
 
 猫眼电影存储格式：
 
-|database|MaoYan|  
+|database|maoyanmovies|
 |:-: | :-: |
 | collections | MaoYanMovies |
 | id | id |
@@ -70,7 +74,7 @@ scrapy crawl MaoYanVideos
 
 热点资讯的存储格式为：
 
-|database|MaoYan|  
+|database|maoyanmovies|
 |:-: | :-: |
 | collections | MaoYanNews |
 | id | id |
@@ -82,28 +86,25 @@ scrapy crawl MaoYanVideos
 | news_date | 新闻发布时间 |
 | view_count | 新闻浏览人数 |
 
-*在爬取页面的时候，将每个页面的资讯都存储为一个数据，因此所有的值均存储为 Array*  
-*猫眼电影一个页面为10条热点资讯*  
-*总共爬取了5个页面，即存储了50条热点资讯*  
+*每个值均为String*
+
+*新闻连接不完整*
+
+
 
 电影预告片的存储格式为：
 
-|database|MaoYan|  
+|database|maoyanmovies|
 |:-: | :-: |
-| collections | MaoYanNews |
+| collections | MaoYanVideos |
 | id | id |
 | title | 视频标题 |
-| abstract | 视频摘要 |
 | cover_img_src | 新闻封面图 |
 | url | 视频链接：链接到视频的预告片播放页面 |
-| date | 视频发布时间 |
 | view_count | 视频播放数 |
 
-*在爬取页面的时候，将每个页面的预告片都存储为一个数据，因此所有的值均存储为 Array*  
-*猫眼电影一个页面包含30支电影预告片*  
-*总共爬取了5个页面，即存储了150条支电影预告片*  
-*由于部分页面的预告片数量小于30，所以爬取的热点资讯不足150*  
-*猫眼电影没有提供视频摘要及视频发布时间，，因此这两项内容为空*
+*所有的值均存储为 String*  
+
 
 ### 4. Robo 3T GUI工具  
 ##### 豆瓣电影的第一项，如下图所示：  

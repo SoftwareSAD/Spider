@@ -22,11 +22,15 @@ HTTPERROR_ALLOWED_CODES = [302,]
 # USER_AGENT = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; AcooBrowser; .NET CLR 1.1.4322; .NET CLR 2.0.50727)"
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36"
 
-# MONGODB 主机环回地址127.0.0.1  
-MONGODB_HOST = '127.0.0.1'  
-# 端口号，默认是27017  
-MONGODB_PORT = 27017  
+# MONGODB 主机
+MONGODB_HOST = 'ds117691.mlab.com'  
+# 端口号
+MONGODB_PORT = 17691 
 # 设置数据库名称
-MONGODB_DBNAME = 'MaoYan'  
+MONGODB_DBNAME = 'maoyanmovie'  
 # 存放本次数据的表名称  
 MONGODB_DOCNAME = 'MaoYanVideos'
+# 数据库的用户名
+MONGODB_USERNAME = 'heygrandpa'
+# 数据库的密码
+MONGODB_PASSWORD = 'SYSU2018'

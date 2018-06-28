@@ -13,6 +13,8 @@ class MaoyanPipeline(object):
         self.mongo_port = mongo_port
         self.mongo_db = mongo_db
         self.collection_name = mongo_co
+        # self.username = mongo_username
+        # self.password = mongo_password
 
     @classmethod
     def from_crawler(cls, crawler):
@@ -20,11 +22,13 @@ class MaoyanPipeline(object):
             mongo_host = crawler.settings.get('MONGODB_HOST'),
             mongo_port = crawler.settings.get('MONGODB_PORT'),
             mongo_db = crawler.settings.get('MONGODB_DBNAME'),
-            mongo_co = crawler.settings.get('MONGODB_DOCNAME')
+            mongo_co = crawler.settings.get('MONGODB_DOCNAME'),
+            # mongo_username = crawler.settings.get('MONGODB_USERNAME'),
+            # mongo_password = crawler.settings.get('MONGODB_PASSWORD')
         )
 
     def open_spider(self, spider):
-        self.client = pymongo.MongoClient(host = self.mongo_host, port = self.mongo_port)
+        self.client = pymongo.MongoClient('mongodb://heygrandpa:SYSU2018@ds117691.mlab.com:17691/maoyanmovie')
         self.db = self.client[self.mongo_db]
 
     def close_spider(self, spider):
