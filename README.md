@@ -3,9 +3,8 @@
 ### 1. 环境要求  
 > 安装Python  
 > 安装scrapy库：conda install scrapy  
-> 安装pymongo库：conda install pymongo
-> 安装fontTools库
-> 
+> 安装pymongo库：conda install pymongo  
+> 安装fontTools库   
 > 安装MongoDB (可选)
 > 
 
