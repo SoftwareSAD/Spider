@@ -105,8 +105,23 @@ scrapy crawl MaoYanVideos
 
 *所有的值均存储为 String*  
 
+电影院的存储格式为：
 
-### 4. Robo 3T GUI工具  
+|database|maoyanmovies|
+|:-: | :-: |
+| collections | cinema |
+| id | id |
+| cinema_name | 电影院名字 |
+| district | 行政区 |
+| online_movie | 上映电影的图片地址 |
+| address | 电影院地址 |
+| telephone | 电话 |
+| img_url | 电影院图片地址 |
+
+*上映电影图片地址存储为Array，其他值均存储为 String*  
+
+
+### 4. Robo 3T GUI工具（用于本地数据库）  
 ##### 豆瓣电影的第一项，如下图所示：  
 ![douban](./img/douban.png)  
 ##### 猫眼电影的第一项，如下图所示：
@@ -115,3 +130,13 @@ scrapy crawl MaoYanVideos
 ![news](./img/news.png)  
 ##### 新闻预告片，如下图所示：
 ![video](./img/video.png) 
+
+### 5. 云端数据库示例
+#### 电影表
+![movie](./img/mlab_maoyanmovie.png)
+#### 电影院表
+![cinema](./img/mlab_cinema.png)
+#### 电影资讯表
+![news](./img/mlab_news.png)
+#### 电影预告片表
+![video](./img/mlab_videos.png)
