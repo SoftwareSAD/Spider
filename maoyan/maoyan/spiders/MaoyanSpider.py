@@ -111,6 +111,8 @@ class MaoyanSpider(CrawlSpider):
 					_lst_uincode.append(item[4:])
 			_lst_uincode = _lst_uincode[1:-1]
 			movie_star = "".join([str(decode_dict[i]) for i in _lst_uincode])
+		else:
+			movie_star = "暂无"
 		# 票房
 		if movie_total_price != "暂无":
 			_lst_uincode = []
