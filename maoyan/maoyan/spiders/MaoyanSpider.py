@@ -103,7 +103,7 @@ class MaoyanSpider(CrawlSpider):
 
 		#解码
 		# 评分
-		if movie_star_title == "用户评分"
+		if movie_star_title == "用户评分":
 			_lst_uincode = []
 			for item in movie_star.__repr__().split("\\u"):
 				_lst_uincode.append("uni" + item[:4].upper())
