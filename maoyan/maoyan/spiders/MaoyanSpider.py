@@ -64,6 +64,7 @@ class MaoyanSpider(CrawlSpider):
 		movie_time = movie_publish.split('/')[1].strip()
 		online_time = sel.xpath('/html/body/div[3]/div/div[2]/div[1]/ul/li[3]/text()').extract_first()
 		movie_star = sel.xpath('/html/body/div[3]/div/div[2]/div[3]/div[1]/div/span/span/text()').extract_first()
+		movie_star_title = sel.xpath('/html/body/div[3]/div/div[2]/div[3]/div[1]/p/text()').extract_first()
 		movie_total_price = sel.xpath('/html/body/div[3]/div/div[2]/div[3]/div[2]/div/span[1]/text()').extract_first()
 		img = sel.xpath('/html/body/div[3]/div/div[1]//img/@src').extract_first()
 		director = sel.xpath('//li[@class="celebrity "]/div/a/text()').extract_first()
@@ -101,20 +102,24 @@ class MaoyanSpider(CrawlSpider):
 		# print(decode_dict)
 
 		#解码
-		_lst_uincode = []
-		for item in movie_star.__repr__().split("\\u"):
-			_lst_uincode.append("uni" + item[:4].upper())
-			if item[4:]:
-				_lst_uincode.append(item[4:])
-		_lst_uincode = _lst_uincode[1:-1]
-		movie_star = "".join([str(decode_dict[i]) for i in _lst_uincode])
-		_lst_uincode = []
-		for item in movie_total_price.__repr__().split("\\u"):
-			_lst_uincode.append("uni" + item[:4].upper())
-			if item[4:]:
-				_lst_uincode.append(item[4:])
-		_lst_uincode = _lst_uincode[1:-1]
-		movie_total_price = "".join([str(decode_dict[i]) for i in _lst_uincode])
+		# 评分
+		if movie_star_title == "用户评分"
+			_lst_uincode = []
+			for item in movie_star.__repr__().split("\\u"):
+				_lst_uincode.append("uni" + item[:4].upper())
+				if item[4:]:
+					_lst_uincode.append(item[4:])
+			_lst_uincode = _lst_uincode[1:-1]
+			movie_star = "".join([str(decode_dict[i]) for i in _lst_uincode])
+		# 票房
+		if movie_total_price != "暂无":
+			_lst_uincode = []
+			for item in movie_total_price.__repr__().split("\\u"):
+				_lst_uincode.append("uni" + item[:4].upper())
+				if item[4:]:
+					_lst_uincode.append(item[4:])
+			_lst_uincode = _lst_uincode[1:-1]
+			movie_total_price = "".join([str(decode_dict[i]) for i in _lst_uincode])
 
 
 		item = MaoyanItem()
